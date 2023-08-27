@@ -6,24 +6,20 @@
 console.info(
   "1/ Implémentez une fonction qui prend en paramètre les dimensions de 2 côtés d'un triangle rectangle et retourne la dimension de l'hypoténuse."
 );
-let sides = [5, 6];
+// let sides = [5, 6];
 // Hypoténuse = racine carré de somme des deux côtés.
 
 function getHypotenuse(a, b) {
-  return Math.sqrt(a + b);
+  return Math.sqrt(a ** 2 + b ** 2);
 }
 
-console.log(getHypotenuse(8, 6));
+console.log(getHypotenuse(3, 4));
 
-// console.log(Math.sqrt(16))
+function getHypot(a, b) {
+  return Math.hypot(a, b);
+}
+console.log(getHypot(3, 4));
 
-// let table = [4, 5]
-// let sum = 0;
-// for (let v of table){
-//     sum += v;
-// }
-// console.log(Math.sqrt(sum))
-// console.log(sum)
 /* ------------------------------------------------------*/
 
 console.info(
@@ -37,8 +33,9 @@ const user4 = { firstName: "Abdel", lastName: "Dems", age: 44 };
 
 function getOlder(a, b) {
   if (a.age > b.age) {
-    return console.log(a.firstName, a.lastName);
-  } else return console.log(b.firstName, b.lastName);
+    return `${a.firstName} ${a.lastName}`;
+  }
+  return `${b.firstName} ${b.lastName}`;
 }
 console.log(getOlder(user3, user4));
 
@@ -47,10 +44,10 @@ console.log(getOlder(user3, user4));
 console.info(
   "3/ Implémentez une fonction qui retourne la valeur la plus grande d'un tableau de nombres, quelqu'en soit la taille."
 );
-let table = [1, 2, 5, 10];
-function getMax(table) {
+let table = [1, 2, 5, 10, 20];
+function getMax(array) {
   let max;
-  for (let v of table) {
+  for (let v of array) {
     max = Math.max(v);
   }
   return max;
@@ -84,9 +81,9 @@ console.info(
   "5/ Implémentez une fonction qui retourne une valeur entière alétoire comprise entre 2 valeurs passées en paramètres."
 );
 function getRandomValue(min, max) {
-  return Math.trunc(Math.random() * (max - min) + min);
+  return Math.floor(Math.random() * (max - min) + min);
 }
-console.log(getRandomValue(10, 20));
+console.log(getRandomValue(100, 560));
 
 /* ------------------------------------------------------*/
 
@@ -94,8 +91,19 @@ console.info(
   "6/ Implémentez une fonction qui retourne une chaîne de caractère aléatoire composée de chiffres et de lettres en majuscule et minuscule, de la taille passée en paramètre."
 );
 
-console.log();
-console.log();
+const ars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+function getArs(lenght) {
+  let newSentence = [];
+  for (let i = 0; i < lenght; i++) {
+    // let randomIndex = Math.floor(Math.random() * ars.length);
+    const randomIndex = Math.floor(Math.random() * ars.length);
+    const randomSentence = ars.charAt(randomIndex);
+    newSentence.push(randomSentence);
+  }
+  return newSentence;
+}
+console.log(getArs(9));
 
 /* ------------------------------------------------------*/
 
@@ -110,13 +118,23 @@ const newbie = {
   job: "web developer",
   city: "Detroit",
   skills: ["HTML", "CSS"],
+  getAge: function () {
+    return new Date(Date.now() - new Date(this.birthdate)).getFullYear() - 1970;
+  },
+  getSkills: function () {
+    let skillsPaul = `les compétences de ${this.firstName} ${this.lastName} sont ${this.skills} `;
+    return skillsPaul;
+  },
+  getSkillsJavascript(newskill) {
+    return this.skills.push(newskill);
+  },
 };
 
 /* ------------------------------------------------------*/
 
 console.info("7/ Implémentez une méthode retournant l'âge de Paul.");
 
-console.log();
+console.log(newbie.getAge());
 
 /* ------------------------------------------------------*/
 
@@ -124,18 +142,19 @@ console.info(
   "8/ Implémentez une méthode retournant un texte listant les compétences de Paul séparées par des virgules."
 );
 
-console.log();
+console.log(newbie.getSkills());
 
 /* ------------------------------------------------------*/
 
 console.info(
   "9/ Implémentez une méthode qui ajoute à Paul une compétence passée en paramètre."
 );
+
 console.info(
   "Ajoutez la compétence Javascript et utilisez la méthode précédente pour vous assurer du résultat."
 );
-
-console.log();
+newbie.getSkillsJavascript("Javascript");
+console.log(newbie.skills);
 
 /* ------------------------------------------------------*/
 
