@@ -31,26 +31,37 @@ const user2 = { firstName: "Samir", lastName: "Ah", age: 22 };
 const user3 = { firstName: "Loanne", lastName: "Bourdin", age: 28 };
 const user4 = { firstName: "Abdel", lastName: "Dems", age: 44 };
 
-function getOlder(a, b) {
+function getOldestUserName(a, b) {
   if (a.age > b.age) {
     return `${a.firstName} ${a.lastName}`;
   }
   return `${b.firstName} ${b.lastName}`;
 }
-console.log(getOlder(user3, user4));
+console.log(getOldestUserName(user3, user4));
+
+function getOldestUserName1(a, b) {
+  return getFullName(a.age > b.age ? a : b);
+}
+function getFullName(user) {
+  return user.firstName + " " + user.lastName;
+}
+
+console.log(getOldestUserName1(user1, user2));
 
 /* ------------------------------------------------------*/
 
 console.info(
   "3/ Implémentez une fonction qui retourne la valeur la plus grande d'un tableau de nombres, quelqu'en soit la taille."
 );
-let table = [1, 2, 5, 10, 20];
+let table = [30, 2, 5, 10];
 function getMax(array) {
   let max;
   for (let v of array) {
-    max = Math.max(v);
+    if (max < v) {
+      max = v;
+    }
+    return max;
   }
-  return max;
 }
 console.log(getMax(table));
 
@@ -59,20 +70,11 @@ console.log(getMax(table));
 console.info(
   "4/ Implémentez une fonction qui prend en paramètre un texte et retourne un objet comptant le nombre d'occurence de chaque mot."
 );
-let texte = "ceci est un texte";
-
-function getObjectInstance(string) {
-  let Counter = {};
-  //     let texte ="ceci est un texte";
-  // let string = "lorem lorem lorem lorem lorem";
-  // function getWordNumber(texte){
-  //   return texte.split(' ').length
-  // }
-
-  // console.log(getWordNumber(string));
-  return;
-}
-
+// function getObjectInstance(string) {
+//   const Counter = {};
+// for(const word of string.split(' ')){
+//   if (word in)
+//
 // console.log(getObjectInstance(string));
 
 /* ------------------------------------------------------*/
@@ -81,7 +83,7 @@ console.info(
   "5/ Implémentez une fonction qui retourne une valeur entière alétoire comprise entre 2 valeurs passées en paramètres."
 );
 function getRandomValue(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 console.log(getRandomValue(100, 560));
 
@@ -128,6 +130,11 @@ const newbie = {
   getSkillsJavascript(newskill) {
     return this.skills.push(newskill);
   },
+  talk: function () {
+    console.log(
+      `my name is ${this.firstName} ${this.lastName}, my birthdate is ${this.birthdate}, i am ${this.job}, i live in ${this.city} and my skylls are ${this.skills} `
+    );
+  },
 };
 
 /* ------------------------------------------------------*/
@@ -161,4 +168,5 @@ console.log(newbie.skills);
 console.info(
   "10/ Implémentez une méthode qui fait parler Paul pour qu'il se présente avec toutes ses caractéristiques. (Nom, prénom, âge, où il vit, son métier, ...)"
 );
+newbie.talk();
 console.log();
